@@ -6,10 +6,14 @@ import os
 
 #Import the backtrader platform
 import backtrader as bt
+from Strategy import TestStrategy
+
 
 if __name__ == '__main__':
     # Create a cerebro entity
     cerebro = bt.Cerebro()
+
+     
 
     # Datas are in a subfolder of the samples. Need to find where the script is
     # because it could have been called from anywhere
@@ -27,6 +31,9 @@ if __name__ == '__main__':
 
     # Add the Data Feed to Cerebro
     cerebro.adddata(data)
+
+    # Add a strategy
+    cerebro.addstrategy(TestStrategy) 
 
     # Set our desired cash start
     cerebro.broker.setcash(100000.0)
