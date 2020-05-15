@@ -14,7 +14,19 @@ if __name__ == '__main__':
     # Datas are in a subfolder of the samples. Need to find where the script is
     # because it could have been called from anywhere
     modpath = os.path.dirname(os.path.abspath(__file__))
-    print(modpath)
+    data = os.path.join(modpath, 'datas/oracle.txt')
+
+    # Create a Data Feed
+    data = bt.feeds.YahooFinanceCSVData(
+        dataname=data,
+        # Do not pass values before this date
+        fromdate=datetime.datetime(2000, 1, 1),
+        # Do not pass values after this date
+        todate=datetime.datetime(2000, 12, 31),
+        reverse=False)
+
+    # Add the Data Feed to Cerebro
+    cerebro.adddata(data)
 
     # Set our desired cash start
     cerebro.broker.setcash(100000.0)
